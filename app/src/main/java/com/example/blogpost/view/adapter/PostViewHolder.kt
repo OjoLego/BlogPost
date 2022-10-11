@@ -6,14 +6,15 @@ import com.example.blogpost.databinding.CardviewBinding
 import com.example.blogpost.model.data.PostResult
 
 private const val TAG = "PostViewHolder"
-class PostViewHolder(val binding: CardviewBinding): RecyclerView.ViewHolder(binding.root){
+class PostViewHolder(private val binding: CardviewBinding): RecyclerView.ViewHolder(binding.root){
 
-    val postTitle = binding.postTitle
-    val postBody = binding.postBody
+    private val postTitle = binding.postTitle
+    private val postBody = binding.postBody
 
-    fun bind(post: PostResult){
+    fun bind(post: PostResult,postClickListener: PostClickListener){
         post.title?.let { Log.d(TAG, it) }
-        postTitle.setText(post.title)
-        postBody.setText(post.body)
+        postTitle.text = post.title
+        postBody.text = post.body
+        postBody.setOnClickListener { postClickListener.onPostClick(post.id!!) }
     }
 }

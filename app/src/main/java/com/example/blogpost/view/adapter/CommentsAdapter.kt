@@ -3,20 +3,20 @@ package com.example.blogpost.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.blogpost.databinding.CardviewBinding
-import com.example.blogpost.model.data.PostResult
+import com.example.blogpost.databinding.CommentsCardviewBinding
+import com.example.blogpost.model.data.CommentsResult
 
-class PostAdapter(val items: List<PostResult>,var postClickListener: PostClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CommentsAdapter(val items: List<CommentsResult>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return PostViewHolder(
-            CardviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return CommentsViewHolder(
+            CommentsCardviewBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder){
-            is PostViewHolder -> {
-                holder.bind(items[position],postClickListener)
+            is CommentsViewHolder -> {
+                holder.bind(items[position])
             }
         }
     }
@@ -24,4 +24,6 @@ class PostAdapter(val items: List<PostResult>,var postClickListener: PostClickLi
     override fun getItemCount(): Int {
         return items.count()
     }
+
+
 }

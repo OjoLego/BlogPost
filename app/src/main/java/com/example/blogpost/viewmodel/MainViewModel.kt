@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.blogpost.model.data.CommentsResult
 import com.example.blogpost.model.data.PostResult
 import com.example.blogpost.model.datasource.remote.api.PostRetrofit
 import com.example.blogpost.model.repository.PostRepository
@@ -19,19 +20,29 @@ class MainViewModel:ViewModel() {
     private var _postList = MutableLiveData<List<PostResult>>()
     val postList : LiveData<List<PostResult>> = _postList
 
-    fun getBlockPost(){
-//        viewModelScope.launch(Dispatchers.IO){
-//            val res = postRepository.getAllPost()
-//            Log.d(TAG,res.toString())
-//            _postList.postValue(res)
-//        }
+    private var _commentsList = MutableLiveData<List<CommentsResult>>()
+    val commentsList: LiveData<List<CommentsResult>> = _commentsList
 
+    fun getBlockPost(){
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val res = postRepository.getPost()
                 Log.d(TAG,res.toString())
                 _postList.postValue(res)
             } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun getComments(postId: String){
+        viewModelScope.launch(Dispatchers.IO){
+            try {
+                val res = postRepository.getComments(postId)
+                Log.d(TAG,res.toString())
+                _commentsList.postValue(res)
+            }
+            catch (e: Exception){
                 e.printStackTrace()
             }
         }

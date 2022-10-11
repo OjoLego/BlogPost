@@ -1,5 +1,6 @@
 package com.example.blogpost
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -7,10 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blogpost.databinding.ActivityMainBinding
 import com.example.blogpost.model.data.PostResult
 import com.example.blogpost.view.adapter.PostAdapter
+import com.example.blogpost.view.adapter.PostClickListener
+import com.example.blogpost.view.screen.CommentsActivity
 import com.example.blogpost.viewmodel.MainViewModel
 
 private const val TAG = "MainActivity"
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
@@ -28,7 +31,13 @@ class MainActivity : AppCompatActivity() {
     private fun initRecyclerView(list: List<PostResult> = emptyList()){
         binding.mainActivityRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            postAdapter = PostAdapter(list)
+            postAdapter = PostAdapter(list,object :PostClickListener{
+                override fun onPostClick(id: Int) {
+                    mainViewModel.getComments(id.toString())
+                    val intent = Intent(this@MainActivity,CommentsActivity::class.java)
+                    startActivity(intent)
+                }
+            })
             adapter = postAdapter
             mainViewModel.getBlockPost()
         }
@@ -39,4 +48,5 @@ class MainActivity : AppCompatActivity() {
             initRecyclerView(it)
         }
     }
+
 }

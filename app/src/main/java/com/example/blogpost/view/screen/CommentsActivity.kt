@@ -23,7 +23,7 @@ class CommentsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCommentsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initRecyclerView2()
+        mainViewModel.getComments(intent.getIntExtra("postId",0).toString())
         observeViewModel2()
     }
 
@@ -32,7 +32,6 @@ class CommentsActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@CommentsActivity)
             commentsAdapter = CommentsAdapter(list)
             adapter = commentsAdapter
-//            mainViewModel.getComments("")
         }
     }
 

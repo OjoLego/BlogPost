@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initRecyclerView()
+        mainViewModel.getBlockPost()
+//        initRecyclerView()
         observeViewModel()
     }
 
@@ -33,13 +34,13 @@ class MainActivity : AppCompatActivity(){
             layoutManager = LinearLayoutManager(this@MainActivity)
             postAdapter = PostAdapter(list,object :PostClickListener{
                 override fun onPostClick(id: Int) {
-                    mainViewModel.getComments(id.toString())
                     val intent = Intent(this@MainActivity,CommentsActivity::class.java)
+                    intent.putExtra("postId",id)
                     startActivity(intent)
                 }
             })
             adapter = postAdapter
-            mainViewModel.getBlockPost()
+//            mainViewModel.getBlockPost()
         }
     }
 

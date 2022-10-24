@@ -5,6 +5,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
+        android:id="@+id/comments_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="121"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/comments_body"
+        android:layout_margin="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+/>
+
+    <TextView
+        android:id="@+id/comments_user_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="lego@gmail.com"
+        android:textColor="@color/purple_700"
+        android:layout_margin="2dp"
+        app:layout_constraintTop_toBottomOf="@id/comments_body"
+        app:layout_constraintStart_toEndOf="@id/comments_id"/>
+    <TextView
         android:layout_marginTop="8dp"
         android:id="@+id/comments_body"
         android:layout_width="match_parent"

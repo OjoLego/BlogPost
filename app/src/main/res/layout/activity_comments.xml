@@ -6,6 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".view.screen.CommentsActivity">
 
+    <LinearLayout
+        android:id="@+id/container_comment_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="@color/teal_700"
+        android:layout_marginTop="1dp">
+
+        <TextView
+            android:id="@+id/post_comment_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="112"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/post_comment_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="title"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:textSize="19sp"
+            />
+
+        <TextView
+            android:id="@+id/post_comment_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="body"
+            android:textStyle="normal"
+            android:textColor="#000"
+            android:textSize="19sp"
+            />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/comments_activity_recycler_view"
         android:layout_width="match_parent"
@@ -15,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container_comment_post"
         app:layout_constraintVertical_bias="1.0"/>
 
 

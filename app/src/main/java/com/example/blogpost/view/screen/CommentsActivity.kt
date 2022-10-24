@@ -1,7 +1,10 @@
 package com.example.blogpost.view.screen
 
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blogpost.R
@@ -9,6 +12,9 @@ import com.example.blogpost.databinding.ActivityCommentsBinding
 import com.example.blogpost.model.data.CommentsResult
 import com.example.blogpost.view.adapter.CommentsAdapter
 import com.example.blogpost.viewmodel.MainViewModel
+import androidx.core.os.bundleOf
+import com.example.blogpost.MainActivity
+import com.example.blogpost.model.data.PostCommentResults
 
 
 private const val TAG = "CommentsActivity"
@@ -19,12 +25,24 @@ class CommentsActivity : AppCompatActivity() {
 
     private lateinit var commentsAdapter: CommentsAdapter
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCommentsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainViewModel.getComments(intent.getIntExtra("postId",0).toString())
         observeViewModel2()
+
+
+        val bundle: Bundle?= intent.extras
+        val postTitle = bundle!!.getString("postTitle")
+        val postBody = bundle!!.getString("postBody")
+        val postId = bundle!!.getInt("postId").toString()
+
+        binding.postCommentTitle.text = postTitle
+        binding.postCommentBody.text = postBody
+        binding.postCommentUserId.text = postId
+
     }
 
     private fun initRecyclerView2(list: List<CommentsResult> = emptyList()){

@@ -1,9 +1,6 @@
 package com.example.blogpost.model.repository
 
-import com.example.blogpost.model.data.CommentsResult
-import com.example.blogpost.model.data.PostResult
-import com.example.blogpost.model.data.SendPostData
-import com.example.blogpost.model.data.SendPostResult
+import com.example.blogpost.model.data.*
 import com.example.blogpost.model.datasource.remote.api.PostApiService
 import retrofit2.Call
 
@@ -21,4 +18,13 @@ class PostRepository(
     suspend fun sendPost(params:SendPostData):SendPostResult{
         return postApiService.sendPost(params)
     }
+
+    suspend fun getPostUser(
+//        postUserId: String
+    ): List<PostUsers>{
+        return postApiService.getPostUser()
+    }
+//    suspend fun searchPost(searchText:String):List<PostResult>{
+//        return postApiService.searchPost(searchText)
+//    }
 }

@@ -37,11 +37,15 @@ class CommentsActivity : AppCompatActivity() {
         val bundle: Bundle?= intent.extras
         val postTitle = bundle!!.getString("postTitle")
         val postBody = bundle!!.getString("postBody")
-        val postId = bundle!!.getInt("postId").toString()
+//        val postId = bundle!!.getInt("postId").toString()
+//        val postUser = bundle!!.getString("postUser")
+        val postUserName = bundle!!.getString("postUserName")
+
 
         binding.postCommentTitle.text = postTitle
         binding.postCommentBody.text = postBody
-        binding.postCommentUserId.text = postId
+        binding.authoursNameComments.text = postUserName
+//        binding.postCommentUserId.text = postId
 
     }
 

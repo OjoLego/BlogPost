@@ -15,36 +15,115 @@
         app:layout_constraintRight_toRightOf="parent"
         android:padding="10dp"
         android:orientation="vertical"
-        android:background="@color/teal_700"
-        android:layout_marginTop="1dp">
+        android:background="#A1D2FB"
+        android:layout_margin="2dp">
 
-        <TextView
-            android:id="@+id/post_comment_user_id"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="112"
-            android:textColor="@color/white"
-            android:textSize="12sp"/>
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/authours_image_comments"
+                android:src="@drawable/saka"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                app:riv_corner_radius="20dp"/>
+            <TextView
+                android:id="@+id/authours_name_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bukayo Saka "
+                android:textColor="#292929"
+                android:fontFamily="@font/roboto_light"
+                android:textSize="14sp"
+                android:paddingTop="10dp"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:id="@+id/time_posted_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 days ago"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                android:paddingTop="10dp"
+                android:fontFamily="@font/roboto_light"
+                android:layout_margin="5dp"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/post_comment_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="title"
-            android:textStyle="bold"
-            android:textColor="#000"
-            android:textSize="19sp"
-            />
-
+            android:text="Your portfolio is stopping you from getting that job"
+            android:textColor="#191919"
+            android:textSize="22sp"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_margin="2dp"/>
         <TextView
             android:id="@+id/post_comment_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="body"
-            android:textStyle="normal"
-            android:textColor="#000"
-            android:textSize="19sp"
+            android:textColor="#292929"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="16sp"
+            android:layout_margin="2dp"
+            android:text="An intense way to learn about the process and practice your designs skills — My 1st hackathon Hackathons have been on my mind since I heard it was a good way to gain experience as a junior UX designer. As my portfolio..."
             />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp">
+            <TextView
+                android:id="@+id/read_post_time_comments"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 min read"
+                android:textSize="13sp"
+                android:fontFamily="@font/roboto_light"/>
+
+            <ImageView
+                android:id="@+id/more_horiz_comments"
+                android:layout_marginStart="300dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_name"/>
+
+        </LinearLayout>
+
+
+        <!--        <TextView-->
+<!--            android:id="@+id/post_comment_user_id"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="112"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="12sp"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/post_comment_title"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="title"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="19sp"-->
+<!--            />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/post_comment_body"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="body"-->
+<!--            android:textStyle="normal"-->
+<!--            android:textColor="#000"-->
+<!--            android:textSize="19sp"-->
+<!--            />-->
 
     </LinearLayout>
 

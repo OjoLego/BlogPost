@@ -1,14 +1,8 @@
 package com.example.blogpost.model.datasource.remote.api
 
-import com.example.blogpost.model.data.CommentsResult
-import com.example.blogpost.model.data.PostResult
-import com.example.blogpost.model.data.SendPostData
-import com.example.blogpost.model.data.SendPostResult
+import com.example.blogpost.model.data.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface PostApiService {
 
@@ -20,4 +14,11 @@ interface PostApiService {
 
     @POST("posts")
     suspend fun sendPost(@Body params:SendPostData):SendPostResult
+
+//    @GET("posts/{userId}/users")
+    @GET("users")
+    suspend fun getPostUser(
+//    @Path("userId") postUserId: String
+): List<PostUsers>
+
 }

@@ -1,20 +1,17 @@
 package com.example.blogpost.view.screen
 
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
-import android.widget.TextView
+import android.util.Log
+import android.view.Menu
 import androidx.activity.viewModels
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blogpost.R
 import com.example.blogpost.databinding.ActivityCommentsBinding
 import com.example.blogpost.model.data.CommentsResult
 import com.example.blogpost.view.adapter.CommentsAdapter
 import com.example.blogpost.viewmodel.MainViewModel
-import androidx.core.os.bundleOf
-import com.example.blogpost.MainActivity
-import com.example.blogpost.model.data.PostCommentResults
 
 
 private const val TAG = "CommentsActivity"
@@ -25,6 +22,7 @@ class CommentsActivity : AppCompatActivity() {
 
     private lateinit var commentsAdapter: CommentsAdapter
 
+//    private lateinit var itemListComments: MutableList<CommentsResult>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +46,33 @@ class CommentsActivity : AppCompatActivity() {
 //        binding.postCommentUserId.text = postId
 
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.menu_comments,menu)
+//        val menuItem = menu!!.findItem(R.id.searchViewComments)
+//        val searchView = menuItem.actionView as SearchView
+//        searchView.maxWidth = Int.MAX_VALUE
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(filterString: String?): Boolean {
+//                filterSearch(filterString!!)
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(filterString: String?): Boolean {
+//                Log.d("QUERY",filterString.toString())
+//                filterSearch(filterString!!)
+//                return true
+//            }
+//
+//        })
+//        return true
+//    }
+
+//    private fun filterSearch(searchWord: String) {
+//        var filterList = mutableListOf<CommentsResult>()
+//        filterList = itemListComments.filter { it.body!!.contains(searchWord) || it.email!!.contains(searchWord)}.toMutableList()
+//        commentsAdapter.setCommentsResult(filterList)
+//    }
 
     private fun initRecyclerView2(list: List<CommentsResult> = emptyList()){
         binding.commentsActivityRecyclerView.apply {

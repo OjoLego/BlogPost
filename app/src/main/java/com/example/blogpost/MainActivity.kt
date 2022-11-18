@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), PostClickListener {
 
 //    private lateinit var postAdapter: PostAdapter
 
-    private lateinit var itemList: MutableList<PostResult>
+    private lateinit var itemListPost: MutableList<PostResult>
 
     var postAdapter = PostAdapter(this)
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(), PostClickListener {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu,menu)
-        val menuItem = menu!!.findItem(R.id.searchView)
+        val menuItem = menu!!.findItem(R.id.searchViewPost)
         val searchView = menuItem.actionView as SearchView
         searchView.maxWidth = Int.MAX_VALUE
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity(), PostClickListener {
 
     private fun filterSearch(searchWord: String){
         var filterList = mutableListOf<PostResult>()
-        filterList = itemList.filter { it.body!!.contains(searchWord) || it.title!!.contains(searchWord) }.toMutableList()
+        filterList = itemListPost.filter { it.body!!.contains(searchWord) || it.title!!.contains(searchWord) }.toMutableList()
         postAdapter.setPostData(filterList)
     }
 

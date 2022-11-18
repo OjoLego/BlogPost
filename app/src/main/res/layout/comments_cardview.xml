@@ -42,7 +42,7 @@
                 android:id="@+id/time_posted"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="45 minss ago"
+                android:text="45 mins ago"
                 android:textColor="#757575"
                 android:textSize="14sp"
                 android:paddingTop="10dp"

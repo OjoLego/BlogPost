@@ -16,6 +16,6 @@ class CommentsViewHolder(private val binding: CommentsCardviewBinding):RecyclerV
         comments.body?.let { Log.d(TAG,it) }
         commentsBody.text = comments.body
 //        commentsId.text = comments.id.toString()
-        commentsUserEmail.text = comments.email.toString()
+        commentsUserEmail.text = comments.email!!.substringBefore('@',comments.email)
     }
 }

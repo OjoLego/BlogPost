@@ -8,6 +8,10 @@ import android.view.Menu
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.blogpost.databinding.ActivityMainBinding
 import com.example.blogpost.model.data.PostResult
@@ -15,13 +19,13 @@ import com.example.blogpost.view.adapter.PostAdapter
 import com.example.blogpost.view.adapter.PostClickListener
 import com.example.blogpost.view.screen.CommentsActivity
 import com.example.blogpost.view.screen.SendPostFragment
-import com.example.blogpost.viewmodel.MainViewModel
+import com.example.blogpost.viewmodel.PostViewModel
 
 private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity(), PostClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    private val mainViewModel: MainViewModel by viewModels()
+    lateinit var mainViewModel: PostViewModel
 
 //    private lateinit var postAdapter: PostAdapter
 
@@ -33,14 +37,14 @@ class MainActivity : AppCompatActivity(), PostClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mainViewModel.getBlockPost()
-        mainViewModel.getPostUser()
+        mainViewModel = ViewModelProvider(this)[PostViewModel::class.java]
+
+       // mainViewModel.addBulkPost()
+        //mainViewModel.addBulkUsers()
         initRecyclerView()
-//        observeViewModel()
         observeViewModelPost()
         observeViewModelUser()
         toCreatePost()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -85,13 +89,14 @@ class MainActivity : AppCompatActivity(), PostClickListener {
     }
 
     private fun observeViewModelPost(){
-        mainViewModel.postList.observe(this){
+        mainViewModel.readAllPostResult.observe(this){
+            itemListPost = it.toMutableList()
             postAdapter.setPostData(it.toMutableList())
         }
     }
 
     private fun observeViewModelUser(){
-        mainViewModel.getPostUser.observe(this){
+        mainViewModel.readAllPostUsers.observe(this){
             postAdapter.setPostUserData(it.toMutableList())
         }
     }

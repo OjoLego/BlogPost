@@ -11,26 +11,27 @@ import com.example.blogpost.R
 import com.example.blogpost.databinding.ActivityCommentsBinding
 import com.example.blogpost.model.data.CommentsResult
 import com.example.blogpost.view.adapter.CommentsAdapter
-import com.example.blogpost.viewmodel.MainViewModel
+import com.example.blogpost.view.adapter.CommentsViewHolder
+import com.example.blogpost.viewmodel.CommentsViewModel
 
 
 private const val TAG = "CommentsActivity"
 class CommentsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCommentsBinding
-    private val mainViewModel: MainViewModel by viewModels()
+    private val commentsViewModel: CommentsViewModel by viewModels()
 
-    private lateinit var commentsAdapter: CommentsAdapter
+    var commentsAdapter = CommentsAdapter()
 
-//    private lateinit var itemListComments: MutableList<CommentsResult>
+    private lateinit var itemListComments: MutableList<CommentsResult>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCommentsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mainViewModel.getComments(intent.getIntExtra("postId",0).toString())
+        commentsViewModel.addBulkComments(intent.getIntExtra("postId",0).toString())
+        initRecyclerView2()
         observeViewModel2()
-
 
         val bundle: Bundle?= intent.extras
         val postTitle = bundle!!.getString("postTitle")
@@ -47,44 +48,47 @@ class CommentsActivity : AppCompatActivity() {
 
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu_comments,menu)
-//        val menuItem = menu!!.findItem(R.id.searchViewComments)
-//        val searchView = menuItem.actionView as SearchView
-//        searchView.maxWidth = Int.MAX_VALUE
-//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-//            override fun onQueryTextSubmit(filterString: String?): Boolean {
-//                filterSearch(filterString!!)
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(filterString: String?): Boolean {
-//                Log.d("QUERY",filterString.toString())
-//                filterSearch(filterString!!)
-//                return true
-//            }
-//
-//        })
-//        return true
-//    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_comments,menu)
+        val menuItem = menu!!.findItem(R.id.searchViewComments)
+        val searchView = menuItem.actionView as SearchView
+        searchView.maxWidth = Int.MAX_VALUE
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(filterString: String?): Boolean {
+                filterSearch(filterString!!)
+                return true
+            }
 
-//    private fun filterSearch(searchWord: String) {
-//        var filterList = mutableListOf<CommentsResult>()
-//        filterList = itemListComments.filter { it.body!!.contains(searchWord) || it.email!!.contains(searchWord)}.toMutableList()
-//        commentsAdapter.setCommentsResult(filterList)
-//    }
+            override fun onQueryTextChange(filterString: String?): Boolean {
+                Log.d("QUERY",filterString.toString())
+                filterSearch(filterString!!)
+                return true
+            }
 
-    private fun initRecyclerView2(list: List<CommentsResult> = emptyList()){
+        })
+        return true
+    }
+
+    private fun filterSearch(searchWord: String) {
+        var filterList = mutableListOf<CommentsResult>()
+        filterList = itemListComments.filter { it.body!!.contains(searchWord) || it.email!!.contains(searchWord)}.toMutableList()
+        commentsAdapter.setCommentsResult(filterList)
+    }
+
+    private fun initRecyclerView2(
+//        list: MutableList<CommentsResult>
+    ){
         binding.commentsActivityRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@CommentsActivity)
-            commentsAdapter = CommentsAdapter(list)
+//            commentsAdapter = CommentsAdapter()
             adapter = commentsAdapter
         }
     }
 
     private fun observeViewModel2(){
-        mainViewModel.commentsList.observe(this){
-            initRecyclerView2(it)
+        commentsViewModel.readAllCommentsResult.observe(this){
+            itemListComments = it.toMutableList()
+            commentsAdapter.setCommentsResult(it.toMutableList())
         }
     }
 }

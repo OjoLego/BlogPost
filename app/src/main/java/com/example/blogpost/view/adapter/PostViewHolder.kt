@@ -1,13 +1,9 @@
 package com.example.blogpost.view.adapter
 
-import android.os.Bundle
 import android.util.Log
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blogpost.databinding.CardviewBinding
 import com.example.blogpost.model.data.PostResult
-import com.example.blogpost.model.data.PostUsers
-import com.example.blogpost.viewmodel.MainViewModel
 
 
 private const val TAG = "PostViewHolder"

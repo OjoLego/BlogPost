@@ -3,8 +3,11 @@ package com.example.blogpost.model.data
 
 import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Keep
+//@Keep
+@Entity(tableName = "PostUsersData")
 data class PostUsers(
     @SerializedName("address")
     val address: Address?,
@@ -13,6 +16,7 @@ data class PostUsers(
     @SerializedName("email")
     val email: String?,
     @SerializedName("id")
+    @PrimaryKey(autoGenerate = true)
     val id: Int?,
     @SerializedName("name")
     val name: String?,

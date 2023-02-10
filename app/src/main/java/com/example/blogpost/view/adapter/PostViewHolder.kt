@@ -13,15 +13,12 @@ class PostViewHolder(private val binding: CardviewBinding): RecyclerView.ViewHol
     private val postBody = binding.postBody
     private val postUserName = binding.authoursName
 
-//    private val postUserId = binding.postUserId
-//    private val bundle = bundleOf("postBody" to binding.postBody.text.toString())
 
     fun bind(post: PostResult, user: String, postClickListener: PostClickListener){
         post.title?.let { Log.d(TAG, it) }
         postTitle.text = post.title
         postBody.text = post.body
         postUserName.text = user
-//        postUserId.text = post.userId.toString()
         postBody.setOnClickListener { postClickListener.onPostClick(post.id!!,post.title!!,post.body!!,
             user!!,it)}
     }

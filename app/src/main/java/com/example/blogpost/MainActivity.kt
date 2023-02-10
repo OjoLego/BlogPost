@@ -25,7 +25,7 @@ private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity(), PostClickListener {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var mainViewModel: PostViewModel
+    private val mainViewModel: PostViewModel by viewModels()
 
 //    private lateinit var postAdapter: PostAdapter
 
@@ -37,10 +37,9 @@ class MainActivity : AppCompatActivity(), PostClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mainViewModel = ViewModelProvider(this)[PostViewModel::class.java]
-
-       // mainViewModel.addBulkPost()
-        //mainViewModel.addBulkUsers()
+        mainViewModel.getBlockPost()
+        mainViewModel.getPostUser()
+//        mainViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
         initRecyclerView()
         observeViewModelPost()
         observeViewModelUser()
@@ -68,46 +67,12 @@ class MainActivity : AppCompatActivity(), PostClickListener {
         return true
     }
 
-    private fun initRecyclerView(
-//        list: MutableList<PostResult>
-    ) {
+    private fun initRecyclerView() {
         binding.mainActivityRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-//            postAdapter = PostAdapter(list,object : PostClickListener {
-//                override fun onPostClick(id: Int, postTitle:String, postBody:String) {
-//                    val intent = Intent(this@MainActivity, CommentsActivity::class.java)
-//                    intent.putExtra("postId", id)
-//                    intent.putExtra("postBody", postBody)
-//                    intent.putExtra("postTitle", postTitle)
-//
-//                    startActivity(intent)
-//                }
-//            })
             adapter = postAdapter
-//            itemList = list
         }
     }
-
-    private fun observeViewModelPost(){
-        mainViewModel.readAllPostResult.observe(this){
-            itemListPost = it.toMutableList()
-            postAdapter.setPostData(it.toMutableList())
-        }
-    }
-
-    private fun observeViewModelUser(){
-        mainViewModel.readAllPostUsers.observe(this){
-            postAdapter.setPostUserData(it.toMutableList())
-        }
-    }
-
-//    private fun observeViewModel() {
-//        mainViewModel.postList.observe(this) {
-//            initRecyclerView(
-//                it.toMutableList()
-//            )
-//        }
-//    }
 
     private fun toCreatePost() {
         binding.addPost.setOnClickListener {
@@ -136,6 +101,19 @@ class MainActivity : AppCompatActivity(), PostClickListener {
                     intent.putExtra("postUserName", postUserName)
 
                     startActivity(intent)
+    }
+
+    private fun observeViewModelPost(){
+        mainViewModel.postList.observe(this){
+            itemListPost = it.toMutableList()
+            postAdapter.setPostData(it.toMutableList())
+        }
+    }
+
+    private fun observeViewModelUser(){
+        mainViewModel.getPostUser.observe(this){
+            postAdapter.setPostUserData(it.toMutableList())
+        }
     }
 
 }

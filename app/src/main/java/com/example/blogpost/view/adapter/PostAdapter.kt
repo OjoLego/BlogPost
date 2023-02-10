@@ -8,9 +8,7 @@ import com.example.blogpost.model.data.PostResult
 import com.example.blogpost.model.data.PostUsers
 import com.example.blogpost.util.getUsersDetails
 
-class PostAdapter(
-//    private var items: MutableList<PostResult>,
-                  var postClickListener: PostClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class PostAdapter(var postClickListener: PostClickListener): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
      var updatedPostResult = mutableListOf<PostResult>()
     var updatedPostUsers = mutableListOf<PostUsers>()
@@ -20,10 +18,6 @@ class PostAdapter(
         notifyDataSetChanged()
     }
 
-//    fun setPostData(itemsPost:MutableList<PostResult>){
-//        updatedPostResult = itemsPost
-//        notifyDataSetChanged()
-//    }
 
     fun setPostUserData(itemsUser:List<PostUsers>){
         updatedPostUsers = itemsUser.toMutableList()

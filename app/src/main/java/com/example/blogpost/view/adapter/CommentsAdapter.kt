@@ -7,9 +7,7 @@ import com.example.blogpost.databinding.CommentsCardviewBinding
 import com.example.blogpost.model.data.CommentsResult
 import com.example.blogpost.model.data.PostResult
 
-class CommentsAdapter(
-//    val items: List<CommentsResult>
-    ): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class CommentsAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     var updatedCommentResult = mutableListOf<CommentsResult>()
 

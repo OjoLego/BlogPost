@@ -15,10 +15,7 @@ interface PostApiService {
     @POST("posts")
     suspend fun sendPost(@Body params:SendPostData):SendPostResult
 
-//    @GET("posts/{userId}/users")
     @GET("users")
-    suspend fun getPostUser(
-//    @Path("userId") postUserId: String
-): List<PostUsers>
+    suspend fun getPostUser(): List<PostUsers>
 
 }

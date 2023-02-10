@@ -12,6 +12,7 @@ import com.example.blogpost.databinding.ActivityCommentsBinding
 import com.example.blogpost.model.data.CommentsResult
 import com.example.blogpost.view.adapter.CommentsAdapter
 import com.example.blogpost.view.adapter.CommentsViewHolder
+import com.example.blogpost.view.adapter.PostAdapter
 import com.example.blogpost.viewmodel.CommentsViewModel
 
 
@@ -21,7 +22,7 @@ class CommentsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCommentsBinding
     private val commentsViewModel: CommentsViewModel by viewModels()
 
-    var commentsAdapter = CommentsAdapter()
+     var commentsAdapter = CommentsAdapter()
 
     private lateinit var itemListComments: MutableList<CommentsResult>
 
@@ -29,22 +30,19 @@ class CommentsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCommentsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        commentsViewModel.addBulkComments(intent.getIntExtra("postId",0).toString())
-        initRecyclerView2()
+        commentsViewModel.getComments(intent.getIntExtra("postId",0).toString())
         observeViewModel2()
+        initRecyclerView2()
 
         val bundle: Bundle?= intent.extras
         val postTitle = bundle!!.getString("postTitle")
         val postBody = bundle!!.getString("postBody")
-//        val postId = bundle!!.getInt("postId").toString()
-//        val postUser = bundle!!.getString("postUser")
         val postUserName = bundle!!.getString("postUserName")
 
 
         binding.postCommentTitle.text = postTitle
         binding.postCommentBody.text = postBody
         binding.authoursNameComments.text = postUserName
-//        binding.postCommentUserId.text = postId
 
     }
 
@@ -75,18 +73,15 @@ class CommentsActivity : AppCompatActivity() {
         commentsAdapter.setCommentsResult(filterList)
     }
 
-    private fun initRecyclerView2(
-//        list: MutableList<CommentsResult>
-    ){
+    private fun initRecyclerView2(){
         binding.commentsActivityRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@CommentsActivity)
-//            commentsAdapter = CommentsAdapter()
             adapter = commentsAdapter
         }
     }
 
     private fun observeViewModel2(){
-        commentsViewModel.readAllCommentsResult.observe(this){
+        commentsViewModel.commentsList.observe(this){
             itemListComments = it.toMutableList()
             commentsAdapter.setCommentsResult(it.toMutableList())
         }
